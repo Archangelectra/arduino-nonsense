@@ -10,12 +10,14 @@
 #define LED_BUILTIN 13
 #endif
 
+// defines the setup for pins and etc?
 void setup()
 {
   // initialize LED digital pin as an output.
   pinMode(LED_BUILTIN, OUTPUT);
 }
 
+// repeats whats assigned to be done here over and over again
 void loop()
 {
   // turn the LED on (HIGH is the voltage level)
