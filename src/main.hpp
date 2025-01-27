@@ -1,3 +1,5 @@
+#include <TM1637Display.h>
+
 // Create a display object of type TM1637Display
 TM1637Display display = TM1637Display(CLK, DIO);
 
