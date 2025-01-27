@@ -14,6 +14,13 @@
 #define SW 4
 #endif
 
+int counter = 0;
+int currentStateCLK;
+int lastStateCLK;
+String currentDir ="";
+unsigned long lastButtonPress = 0;
+
+
 // defines the setup for pins and etc?
 void setup()
 {
