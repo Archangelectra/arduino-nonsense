@@ -41,6 +41,7 @@ void setup()
 // repeats whats assigned to be done here over and over again
 void loop()
 {
+  // maybe consider try using analog write to get the LED to fade in and out, so i dont have to buy my own actual LEDs and resistors.
   // turn the LED on (HIGH is the voltage level)
   digitalWrite(LED_BUILTIN, HIGH);
 
