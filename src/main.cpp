@@ -8,6 +8,9 @@
 
 #ifndef LED_BUILTIN
 #define LED_BUILTIN 13
+#define CLK 2
+#define DT 3
+#define SW 4
 #endif
 
 // defines the setup for pins and etc?
@@ -15,6 +18,16 @@ void setup()
 {
   // initialize LED digital pin as an output.
   pinMode(LED_BUILTIN, OUTPUT);
+  // Set encoder pins as inputs
+	pinMode(CLK,INPUT);
+	pinMode(DT,INPUT);
+	pinMode(SW, INPUT_PULLUP);
+
+	// Setup Serial Monitor
+	Serial.begin(9600);
+
+	// Read the initial state of CLK
+	lastStateCLK = digitalRead(CLK);
 }
 
 // repeats whats assigned to be done here over and over again
