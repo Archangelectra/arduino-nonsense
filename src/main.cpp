@@ -31,6 +31,7 @@ void loop() {
   delay(1000);
 }
 
+/*
 static void fadein () {
   // set the brightness of pin 9:
   analogWrite(led, brightness);
@@ -45,3 +46,4 @@ static void fadein () {
   // wait for 30 milliseconds to see the dimming effect
   delay(30);
 }
+*/
