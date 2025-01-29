@@ -30,3 +30,11 @@ const uint8_t allON[] = {0xff, 0xff, 0xff, 0xff};
 
 // Create an array that turns all segments OFF
 const uint8_t allOFF[] = {0x00, 0x00, 0x00, 0x00};
+
+// creates an array for turning the center lines on only
+const uint8_t lines[] = {
+    SEG_G,
+    SEG_G,
+    SEG_G,
+    SEG_G
+}

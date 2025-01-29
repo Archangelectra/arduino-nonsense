@@ -65,6 +65,8 @@ void loop()
 		Serial.print(currentDir);
 		Serial.print(" | Counter: ");
 		Serial.println(counter);
+
+    display.showNumberDec(counter);
 	}
 
 	// Remember last CLK state
@@ -83,7 +85,10 @@ void loop()
 
 		// Remember last button press event
 		lastButtonPress = millis();
+
+    display.setSegments(lines);
 	}
   // Put in a slight delay to help debounce the reading
 	delay(1);
+  display.clear();
 }
