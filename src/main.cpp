@@ -7,13 +7,6 @@
 #include "Arduino.h"
 #include "main.hpp"
 
-#ifndef LED_BUILTIN
-#define LED_BUILTIN 13
-#define CLK 2
-#define DT 3
-#define SW 4
-#endif
-
 int counter = 0;
 int currentStateCLK;
 int lastStateCLK;
@@ -36,21 +29,61 @@ void setup()
 
 	// Read the initial state of CLK
 	lastStateCLK = digitalRead(CLK);
+  
 }
 
 // repeats whats assigned to be done here over and over again
 void loop()
 {
-  // maybe consider try using analog write to get the LED to fade in and out, so i dont have to buy my own actual LEDs and resistors.
-  // turn the LED on (HIGH is the voltage level)
-  digitalWrite(LED_BUILTIN, HIGH);
 
-  // wait for a second
-  delay(1000);
+  // Set the brightness to 5 (0=dimmest 7=brightest)
+	display.setBrightness(5);
 
-  // turn the LED off by making the voltage LOW
-  digitalWrite(LED_BUILTIN, LOW);
+	// Set all segments ON
+	display.setSegments(allON);
 
-   // wait for a second
-  delay(1000);
+	delay(2000);
+	display.clear();
+  currentStateCLK = digitalRead(CLK);
+
+	// If last and current state of CLK are different, then pulse occurred
+	// React to only 1 state change to avoid double count
+	if (currentStateCLK != lastStateCLK  && currentStateCLK == 1){
+
+		// If the DT state is different than the CLK state then
+		// the encoder is rotating CCW so decrement
+		if (digitalRead(DT) != currentStateCLK) {
+			counter --;
+			currentDir ="CCW";
+		} else {
+			// Encoder is rotating CW so increment
+			counter ++;
+			currentDir ="CW";
+		}
+
+		Serial.print("Direction: ");
+		Serial.print(currentDir);
+		Serial.print(" | Counter: ");
+		Serial.println(counter);
+	}
+
+	// Remember last CLK state
+	lastStateCLK = currentStateCLK;
+
+  // read button state
+  int btnState = digitalRead(SW);
+
+	//If we detect LOW signal, button is pressed
+	if (btnState == LOW) {
+		//if 50ms have passed since last LOW pulse, it means that the
+		//button has been pressed, released and pressed again
+		if (millis() - lastButtonPress > 50) {
+			Serial.println("Button pressed!");
+		}
+
+		// Remember last button press event
+		lastButtonPress = millis();
+	}
+  // Put in a slight delay to help debounce the reading
+	delay(1);
 }
